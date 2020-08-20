@@ -1,3 +1,5 @@
+import { googleAuth } from '../firebase/firebase';
+
 export const SIGN_IN = 'SIGN_IN';
 export const IS_SIGNING = 'IS_SIGNING';
 export const SIGN_OUT = 'SIGN_OUT';
@@ -13,10 +15,18 @@ export const completeTodo = (id) => {
 };
 
 export const signIn = (payload) => {
-    return { action: SIGN_IN, payload };
-};
-export const isSigning = () => {
-    return { action: IS_SIGNING };
+    return (dispatch) => {
+        dispatch({ type: IS_SIGNING });
+        googleAuth()
+        .then(user => {
+            console.log(user);
+            dispatch({ type: SIGN_IN, payload: user });
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        
+    };
 };
 export const signOut = () => {
     return { action: SIGN_OUT };

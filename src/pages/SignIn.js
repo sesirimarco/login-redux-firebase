@@ -1,20 +1,12 @@
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
-import { googleAuth } from '../firebase/firebase';
-import { isSigning, signIn} from '../redux/actions'
-const SignIn = (isSigning, isLogged, signIn) => {
+import { useSelector, useDispatch } from 'react-redux';
+import { signIn } from '../redux/actions'
+const Signin = () => {
     
     let isLoading = useSelector(state => state.isLoading);
+    const dispatch = useDispatch()
     const signInWithGoogle = () =>{
-        isSigning();    
-        googleAuth()
-        .then(user => {
-            console.log(user);
-            signIn(user);
-        })
-        .catch(error => {
-            console.log(error);
-        })
+        dispatch(signIn());
     };
     return (
         <>
@@ -23,7 +15,5 @@ const SignIn = (isSigning, isLogged, signIn) => {
         </>
     );
 };
-export default connect(
-    ({isLoading, isLogged}) => ({isLoading, isLogged}),
-    {isSigning, signIn}
-)(SignIn);
+
+export default Signin;
