@@ -1,6 +1,7 @@
 import { 
     SIGN_IN,
     IS_SIGNING, 
+    IS_LOGGED,
     SIGN_OUT, 
     ADD_TODO, 
     COMPLETE_TODO 
@@ -34,6 +35,12 @@ const todoApp = (state = initialState, action) => {
                 isLogged: false,
                 isLoading: false
             }
+        case IS_LOGGED:
+                return {
+                    ...state,
+                    user: action.payload,
+                    isLogged: true
+                }
         case ADD_TODO:
             return {
                 ...state, 

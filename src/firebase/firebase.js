@@ -13,7 +13,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const provider = new firebase.auth.GoogleAuthProvider();
 
-export const googleAuth = () => {
+export const firebaseSignIn = () => {
     return new Promise((resolve, reject) => {
         firebase.auth().signInWithPopup(provider)
         .then((result) => {
@@ -22,6 +22,30 @@ export const googleAuth = () => {
         .catch(({code, message, email}) => {
             reject(code, message, email);
         })
-    });
-    
+    }); 
 };
+export const firebaseSignOut = () => {
+    return new Promise((resolve, reject) => {
+        firebase.auth().signOut()
+        .then((result) => {
+            resolve();
+        })
+        .catch(({code, message, email}) => {
+            reject(code, message, email);
+        })
+    }); 
+};
+
+export const firebaseIsLogged = () => {
+    return new Promise((resolve, reject) => {
+        firebase.auth().onAuthStateChanged((user) => {
+            console.log('>>', user)
+            if (user) {
+                resolve(user);
+            } else {
+                reject('Not logged');
+            };
+        });
+        
+    });
+}

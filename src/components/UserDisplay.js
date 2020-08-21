@@ -1,24 +1,24 @@
 import React from 'react';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-
-const UserDisplay = ({name, url}) => {
+import Dropdown from 'react-bootstrap/Dropdown';
+const UserDisplay = ({name, url, logout}) => {
 
     return (
         <>
-        <Row>
-            <Col className="md-3">
-                <img 
-                    src={url} 
-                    alt={name} 
-                    className="img-thumbnail float-left w-25 rounded-circle border border-primary">
-                    
-                </img>
-            </Col>
-            <Col className="md-9">
-                <h5>{name}</h5>
-            </Col>
-        </Row>
+            <Dropdown>
+                    <Dropdown.Toggle variant="text-white" id="dropdown-basic" className="e-caret-hide">
+                    <img 
+                        src={url} 
+                        alt={name} 
+                        width="40px"
+                        className="img-thumbnail rounded-circle border border-primary">
+                    </img>
+                    <h5 className="float-right p-2">{name}</h5>
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    <Dropdown.Item href="#" onClick={() => {logout()}}>Logout</Dropdown.Item>
+                </Dropdown.Menu>
+                </Dropdown>
         </>
     );
 };
