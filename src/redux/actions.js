@@ -35,7 +35,6 @@ export const isLogged = () => {
             dispatch({type: IS_LOGGED, payload: user});
         })
         .catch((err) => {
-            console.log('CurrentUser: ', err)
             dispatch({type: IS_LOGGED, payload: null});
         });
     };

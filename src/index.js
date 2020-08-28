@@ -8,11 +8,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
+import logger from '../src/redux/middleware/logger'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
     todoApp,
-    composeEnhancers(applyMiddleware(thunk))
+    composeEnhancers(applyMiddleware(logger, thunk))
   )
 ReactDOM.render(
   <Provider store={store}>
