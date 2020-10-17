@@ -1,0 +1,9 @@
+.timer-font {
+  font-size: 50pt;
+}
+
+@media screen and (max-width: 560px) {
+  .timer-font {
+      font-size:22pt;
+  }
+}

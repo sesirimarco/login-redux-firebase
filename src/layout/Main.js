@@ -18,7 +18,7 @@ const Main = () => {
     return (
         <main>
             <Switch>
-                <Route exact path="/" component={isLogged ? Todos :Home}></Route>
+                <Route exact path="/" component={Home}></Route>
                 <Route path="/signin" component={SignIn}></Route>
             </Switch>
         </main>

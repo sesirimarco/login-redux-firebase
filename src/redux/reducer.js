@@ -39,7 +39,7 @@ const todoApp = (state = initialState, action) => {
                 return {
                     ...state,
                     user: action.payload,
-                    isLogged: true
+                    isLogged: action.payload ? true : false
                 }
         case ADD_TODO:
             return {
