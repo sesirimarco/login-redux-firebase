@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/database";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCZNqecMw65gkc7Qw4kPaaj4fV7CzuuARo",
@@ -13,6 +14,41 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const provider = new firebase.auth.GoogleAuthProvider();
 
+export const db = firebase.database().ref('/todos');
+export const createTodo = (text) => {
+    return new Promise((resolve, reject) => {
+        db.push({
+            title: text,
+        }).then(result => {
+            resolve(result);
+        }).catch(error => {
+            console.log(error);
+            reject(error);
+        })
+    })
+    
+}
+export const getAllTodos = (text) => {
+    return new Promise((resolve, reject) => {
+        console.log('getall')
+        db.once('value').then(snapshot => {
+            const todos = [];
+            snapshot.forEach(function(childSnapshot) {
+                todos.push({
+                    userId: 1,
+                    id: childSnapshot.key, 
+                    title: childSnapshot.val().title,
+                    complete: false
+                });
+              });
+            resolve(todos);
+        }).catch(error => {
+            console.log(error);
+            reject(error);
+        })
+    })
+    
+}
 export const firebaseSignIn = () => {
     return new Promise((resolve, reject) => {
         firebase.auth().signInWithPopup(provider)

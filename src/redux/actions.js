@@ -1,4 +1,10 @@
-import { firebaseSignIn, firebaseSignOut, firebaseIsLogged } from '../firebase/firebase';
+import { 
+    firebaseSignIn, 
+    firebaseSignOut, 
+    firebaseIsLogged,
+    createTodo,
+    getAllTodos, 
+} from '../firebase/firebase';
 import axios from 'axios';
 
 
@@ -58,12 +64,9 @@ export const signOut = () => {
 
 export const initTodos = () => {
     return (dispatch) => {
-        axios({
-            method: 'get',
-            url: 'https://jsonplaceholder.typicode.com/todos',
-        })
-        .then(res => {
-            dispatch({ type: INIT_TODOS, todos: res.data});
+        getAllTodos()
+        .then(resp => {
+            dispatch({ type: INIT_TODOS, todos: resp});
         })
         .catch(error => {
             console.log(error);
@@ -72,7 +75,16 @@ export const initTodos = () => {
 
 };
 export const addTodo = (text) => {
-    return { type: ADD_TODO, text };
+    return (dispatch) => {
+        //dispatch({ type: IS_SIGNING });
+        createTodo(text)
+        .then(user => {
+            dispatch({ type: ADD_TODO, text });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    };
 };
 export const completeTodo = (id) => {
     return { type: COMPLETE_TODO, id };
