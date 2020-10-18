@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signIn } from '../redux/actions';
 const Signin = () => {
     
-    let isLoading = useSelector(state => state.isLoading);
+    let isLoading = useSelector(state => state.auth.isLoading);
     const dispatch = useDispatch()
     const signInWithGoogle = () =>{
         dispatch(signIn());

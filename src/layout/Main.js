@@ -1,11 +1,10 @@
 import React , { useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import Home from '../pages/Home';
-import Todos from '../pages/Todos';
 import SignIn from '../pages/SignIn';
 import { useSelector } from 'react-redux';
 const Main = () => {
-    const isLogged = useSelector(state => state.isLogged);
+    const isLogged = useSelector(state => state.auth.isLogged);
     const history = useHistory();
     useEffect(() => {
         history.push(

@@ -39,7 +39,6 @@ export const firebaseSignOut = () => {
 export const firebaseIsLogged = () => {
     return new Promise((resolve, reject) => {
         firebase.auth().onAuthStateChanged((user) => {
-            console.log('>>', user)
             if (user) {
                 resolve(user);
             } else {

@@ -8,7 +8,7 @@ import { isLogged, signOut } from '../redux/actions';
 
 const LOCAL_STORAGE_USER = 'user';
 const Header = () => {
-    const user = useSelector((state) => state.user);
+    const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
     useEffect(() => { 
         dispatch(isLogged());
