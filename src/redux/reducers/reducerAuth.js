@@ -3,7 +3,7 @@ import {
     IS_SIGNING, 
     IS_LOGGED,
     SIGN_OUT, 
-} from '../actions';
+} from '../actions/authActions';
 
 const initialState = {
     isLogged: false,

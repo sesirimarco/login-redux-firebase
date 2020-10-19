@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { signIn } from '../redux/actions';
+import { signIn } from '../redux/actions/authActions';
 const Signin = () => {
     
     let isLoading = useSelector(state => state.auth.isLoading);

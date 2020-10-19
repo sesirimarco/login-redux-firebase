@@ -9,7 +9,7 @@ import {
 	completeTodo,
 	setVisibilityFilter,
 	visibilityFilters,
-} from '../../redux/actions';
+} from '../../redux/actions/todosActions';
 
 function TodoList() {
 	const dispatch = useDispatch();

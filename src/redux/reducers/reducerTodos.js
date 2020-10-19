@@ -4,7 +4,7 @@ import {
     SET_VISIBILITY_FILTER, 
     visibilityFilters,
     INIT_TODOS
-} from '../actions';
+} from '../actions/todosActions';
 
 const initState = [];
 const { SHOW_ALL } = visibilityFilters;

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Navbar from 'react-bootstrap/Navbar';
 import UserDisplay from '../components/UserDisplay'
-import { isLogged, signOut } from '../redux/actions';
+import { isLogged, signOut } from '../redux/actions/authActions';
 
 const LOCAL_STORAGE_USER = 'user';
 const Header = () => {
