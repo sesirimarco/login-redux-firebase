@@ -26,7 +26,8 @@ const todos = (state = initState, action) => {
                 {
                     id: state.length + 1, 
                     title: action.title,
-                    completed: false
+                    completed: false, 
+                    count: 0
                 }
             ]
         case COMPLETE_TODO:

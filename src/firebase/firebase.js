@@ -15,11 +15,13 @@ firebase.initializeApp(firebaseConfig);
 const provider = new firebase.auth.GoogleAuthProvider();
 
 export const db = firebase.database();
-export const createTodo = ({title, uid}) => {
+export const createTodo = ({title, uid, complete = false, count = 0}) => {
     return new Promise((resolve, reject) => {
         db.ref('todos').push({
             title,
-            uid
+            uid,
+            complete,
+            count
         }).then(result => {
             resolve(result);
         }).catch(error => {
@@ -42,7 +44,8 @@ export const getAllTodos = (uid) => {
                     userId: 1,
                     id: childSnapshot.key, 
                     title: childSnapshot.val().title,
-                    complete: false
+                    complete: childSnapshot.val().complete,
+                    count: childSnapshot.val().count
                 });
               });
             resolve(todos);
