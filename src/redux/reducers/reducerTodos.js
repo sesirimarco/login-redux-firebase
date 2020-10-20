@@ -25,7 +25,7 @@ const todos = (state = initState, action) => {
                 ...state,
                 {
                     id: state.length + 1, 
-                    title: action.text,
+                    title: action.title,
                     completed: false
                 }
             ]

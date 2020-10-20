@@ -14,11 +14,12 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const provider = new firebase.auth.GoogleAuthProvider();
 
-export const db = firebase.database().ref('/todos');
-export const createTodo = (text) => {
+export const db = firebase.database();
+export const createTodo = ({title, uid}) => {
     return new Promise((resolve, reject) => {
-        db.push({
-            title: text,
+        db.ref('todos').push({
+            title,
+            uid
         }).then(result => {
             resolve(result);
         }).catch(error => {
@@ -28,10 +29,13 @@ export const createTodo = (text) => {
     })
     
 }
-export const getAllTodos = (text) => {
+export const getAllTodos = (uid) => {
     return new Promise((resolve, reject) => {
-        console.log('getall')
-        db.once('value').then(snapshot => {
+        //console.log('getall', db.ref('todos').orderByChild('uid').equalTo(uid))
+        db.ref('todos')
+        .orderByChild('uid')
+        .equalTo(uid)
+        .on('value', snapshot => {
             const todos = [];
             snapshot.forEach(function(childSnapshot) {
                 todos.push({
@@ -42,9 +46,6 @@ export const getAllTodos = (text) => {
                 });
               });
             resolve(todos);
-        }).catch(error => {
-            console.log(error);
-            reject(error);
         })
     })
     

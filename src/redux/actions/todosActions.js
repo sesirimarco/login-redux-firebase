@@ -14,9 +14,10 @@ export const visibilityFilters = {
     SHOW_ACTIVE: 'SHOW_ACTIVE',
 };
 
-export const initTodos = () => {
+export const initTodos = ({providerData}) => {
+    
     return (dispatch) => {
-        getAllTodos()
+        getAllTodos(providerData[0].uid)
         .then(resp => {
             dispatch({ type: INIT_TODOS, todos: resp});
         })
@@ -26,12 +27,14 @@ export const initTodos = () => {
     };
 
 };
-export const addTodo = (text) => {
+export const addTodo = ({title, user}) => {
     return (dispatch) => {
         //dispatch({ type: IS_SIGNING });
-        createTodo(text)
-        .then(user => {
-            dispatch({ type: ADD_TODO, text });
+        const {uid} = user.providerData[0];
+        createTodo({title, uid})
+        .then(result => {
+            console.log('result ' ,result)
+            dispatch({ type: ADD_TODO, title });
         })
         .catch(error => {
             console.log(error);

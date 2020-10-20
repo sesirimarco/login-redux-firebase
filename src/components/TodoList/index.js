@@ -12,13 +12,22 @@ import {
 } from '../../redux/actions/todosActions';
 
 function TodoList() {
+	const user = useSelector(state => state.auth.user);
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(initTodos());
-	}, []);
+		if(user) {
+			dispatch(initTodos(user));
+		}
+		
+	}, [user]);
 	const addNewTask = (value) => {
 		if(value.length > 3) {
-			dispatch(addTodo(value));
+			if(user) {
+				dispatch(addTodo({title:value, user}));
+			}else {
+				alert('Login please')
+			}
+			
 		}
 	};
 	const todos = useSelector(state => state.todos);
