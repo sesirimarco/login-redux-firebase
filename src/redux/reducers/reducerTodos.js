@@ -19,7 +19,7 @@ const visibilityFilter = (state = SHOW_ALL, action) => {
 const todos = (state = initState, action) => {
     switch(action.type) {
         case INIT_TODOS:
-            return [...state, ...action.todos]
+            return [...action.todos]
         case ADD_TODO:
             return [
                 ...state,
