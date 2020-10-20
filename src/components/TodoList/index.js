@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import AddTodo from './addTodo';
 import FiltersTodo from './filtersTodo';
@@ -12,6 +12,7 @@ import {
 } from '../../redux/actions/todosActions';
 
 function TodoList() {
+	const [currentTask, setcurrentTask] = useState('');
 	const user = useSelector(state => state.auth.user);
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -34,10 +35,10 @@ function TodoList() {
 	const selectedFilter = useSelector(state => state.visibilityFilter);
 		
 	return (
-		<div className="container">
+		<div className="container" style={{ minWidth: 300, maxWidth: 700 }}>
 			<div className="row justify-content-center">
-				<div className="col-9 col-sm-9 col-md-6">
-					<h2 className="display-5 mt-3">Notes with Redux</h2>
+				<div className="col-12 col-sm-12 col-md-12">
+					<h2 className="display-5 mt-3">{currentTask}</h2>
 					<hr />
 					<div className="input-group mt-3">
 						<AddTodo
@@ -49,7 +50,7 @@ function TodoList() {
 				</div>
 			</div>
 			<div className="row justify-content-center">
-				<div className="col-9 col-sm-9 col-md-6">
+				<div className="col-12 col-sm-12 col-md-12">
 					<div className="input-group mt-3">
 						<FiltersTodo 
 							onChange={(filter) => {
@@ -61,13 +62,16 @@ function TodoList() {
 				</div>
 			</div>
 			<div className="row justify-content-center">
-				<div className="col-9 col-sm-9 col-md-6">
+				<div className="col-12 col-sm-12 col-md-12">
 					<ListTodo
 						todos={todos}
 						selectedFilter={selectedFilter}
 						filters={visibilityFilters}
 						onClick={(id) => {
 							dispatch(completeTodo(id));
+						}}
+						onSelect={(title) => {
+							setcurrentTask(title);
 						}}
 					/>
 					</div>

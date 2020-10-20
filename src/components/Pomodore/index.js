@@ -90,8 +90,8 @@ const Pomodore = () => {
         <Container className="border rounded-lg text-center mt-5" 
             style={{ minWidth: 300, maxWidth: 700 }}
         >
-            <h1 className="display-4 text-secondary py-4"> Pomofocus </h1>
-            <Row className="justify-content-center">
+            
+            <Row className="justify-content-center py-4">
                 <Col>
                     <div id="session-label" className="text-secondary pb-1"> 
                         Session length

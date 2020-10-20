@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
 const ListTodo = (props) => {
+    const [selectedId, setSelectedId] = useState('');
     const getFilteredTodos = (todos, selectedFilter) => {
         switch(selectedFilter) {
             case props.filters.SHOW_COMPLETE:
@@ -19,10 +20,24 @@ const ListTodo = (props) => {
                 <ul className="list-group mt-3">
                     {filteredsTodos.map((todo, index) => 
                         <li 
-                            className="list-group-item d-flex justify-content-between align-items-center" 
+                            className={`${selectedId ===  index ? 'text-light bg-dark' : ''} list-group-item d-flex justify-content-between align-items-center`}
                             key={index}
+                            onClick={() => {
+                                setSelectedId(index);
+                                props.onSelect(todo.title)
+                            }}
                         >
                             {todo.title}
+                            {todo.completed &&
+                            <button 
+                                className="btn btn-outline-primary" 
+                                onClick={() => {
+                                    setSelectedId(index);
+                                    props.onSelect(todo.title)
+                                }}>
+                                    PomoIt
+                                </button>
+                            }
                             {!todo.completed &&
                                 <button 
                                     className="btn btn-outline-primary" 
