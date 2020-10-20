@@ -4,7 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Navbar from 'react-bootstrap/Navbar';
 import UserDisplay from '../components/UserDisplay'
-import { isLogged, signOut } from '../redux/actions/authActions';
+import MenuLogin from '../components/MenuLogin'
+import { isLogged, signOut, signIn } from '../redux/actions/authActions';
 
 const LOCAL_STORAGE_USER = 'user';
 const Header = () => {
@@ -16,6 +17,9 @@ const Header = () => {
     }, []);
     const logout = () => {
         dispatch(signOut());
+    };
+    const logingWithGoogle = () => {
+        dispatch(signIn());
     };
     return (
         <header 
@@ -44,7 +48,10 @@ const Header = () => {
                             />
                              
                         ) : (
-                            <NavLink to="/signin">Sign in</NavLink>
+                            <MenuLogin 
+                                title={`with Google`}
+                                login={() => { logingWithGoogle()}}
+                            />
                         )}
                     </Navbar.Text>
                 </Navbar.Collapse>
